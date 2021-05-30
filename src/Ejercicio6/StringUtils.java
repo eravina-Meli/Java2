@@ -111,40 +111,82 @@ public class StringUtils
 		//Retorna una cadena identica a s, pero sin espacios a la izquierda
 		String cadena ="";
 		char space = ' ';
-		int indexUltimoChars =0;
+		int largoCadena = s.length();
 
 		for (int i=0; i<s.length(); i++){
-			if(s.charAt(i) != space && indexUltimoChars < i) {
-				indexUltimoChars = i;
-				cadena += s.charAt(i);
+			if(s.charAt(i) != space) {
+				cadena = s.substring(i,largoCadena);
+				break;
 			}
-			cadena += s.replace(" ", "");
 		}
 		return cadena;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		//String espaciosIzq1 = "ferreira";
-		String espaciosIzq2 = "     ferreira      a";
-		String retur= ltrim(espaciosIzq2);
+		//String espaciosIzq2 = "     ferreira      a";
+		//String retur= ltrim(espaciosIzq2);
+
+		String espaciosIzq2 = "a     ferreira      ";
+		String retur= rtrim(espaciosIzq2);
 		System.out.println(retur);
 		//System.out.println(espaciosIzq2);
-	}
+	}*/
 
 	public static String rtrim(String s){
 		//Retorna una cadena identica a s, pero sin espacios a la derecha.
-		String cadena = s.replace(" ","");
+		String cadena ="";
+		char space = ' ';
+
+		for (int i=s.length()-1; i< s.length(); i--){
+			if(s.charAt(i) != space) {
+				cadena = s.substring(0,i+1);
+				break;
+			}
+		}
+
 		return cadena;
 	}
 	public static String trim(String s){
 		//Retorna igual que lpad, pero sin espacios a la derecha ni izquierda
-		return "";
+		String cadena ="";
+		char space = ' ';
+		for (int i =0; i < s.length(); i++){
+			if(s.charAt(i) != space){
+				cadena += s.charAt(i);
+			}
+		}
+		return cadena;
 	}
+	/*public static void main(String[] args) {
+		String espaciosIzq2 = "a     ferreira      a";
+		String retur= trim(espaciosIzq2);
+		System.out.println(retur);
+		//System.out.println(espaciosIzq2);
+	}*/
 
 	public static int indexOfN(String s, char c, int n){
 		//retorna la posicion de la n-esima ocurrencia del carater c, dentro de s, o -1 si
-		//s no contiene a c. Por ejemplo, si s="John|Paul|George|Ringo", c="|", y n=2, la funcion
+		//s no contiene a c.
+		// Por ejemplo, si s="John|Paul|George|Ringo", c="|", y n=2, la funcion
 		//debe retornar la posicion de la segunda ocurrencia del caracter pipe dentro de la cadena s, en este caso es 9
-		return 0;
+		int posicionRetorno =0;
+		int contadorChar =0;
+		for (int i =0; i < s.length(); i++){
+			if(s.charAt(i) == c){
+				contadorChar++;
+				if(contadorChar == n){
+					posicionRetorno = i;
+				}
+			}
+		}
+		return posicionRetorno;
+	}
+	public static void main(String[] args) {
+		String espaciosIzq2 = "John|Paul|George|Ringo";
+		char c = '|';
+		int n =2;
+		int posicionRetorno = indexOfN(espaciosIzq2,c,n);
+		System.out.println(posicionRetorno);
 	}
 }
